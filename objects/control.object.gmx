@@ -117,7 +117,7 @@ if (keyboard_check_released(vk_f1))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var vw, vh, pw, ph, c1, c2, c3, c4, c5, _x, _y;
+            <string>var vw, vh, pw, ph, c1, c2, c3, c4, c5, _x, _y, _x2, _y2;
 vw = view_wview[0];
 vh = view_hview[0];
 pw = view_wport;
@@ -127,8 +127,11 @@ c2 = c_white;
 c3 = c_dkgray;
 c4 = c_ltgray;
 c5 = c_black;
-_y = 0;
 _x = vw / 4;
+_y = 0;
+_x2 = 0;
+_y2 = 0;
+
 
 // Draw debug text
 d3d_set_lighting(false);
@@ -139,22 +142,77 @@ if (debug_info)
     draw_text_colour(_x + 10, _y + 85, "X: " + string(cam.x) + "; View to X: " + string(cam.xt), c2, c2, c2, c2, 1);
     draw_text_colour(_x + 10, _y + 100, "Y: " + string(cam.y) + "; View to Y: " + string(cam.yt), c2, c2, c2, c2, 1);
     draw_text_colour(_x + 10, _y + 115, "Z: " + string(cam.z) + "; View to Z: " + string(cam.zt), c2, c2, c2, c2, 1);
+    draw_text_colour(_x + 10, _y + 130, string(mouse_x), c2, c2, c2, c2, 1);
 }
 
 // Draw interface
-draw_set_alpha(0.7333);
 // Background for tools panel
+draw_set_alpha(0.7333);
 draw_rectangle_colour(0, 0, vw / 4, vh, c3, c3, c3, c3, false);
+
 // Save button
-draw_rectangle_colour(15, 20, vw / 8 - 10, 50, c4, c4, c4, c4, false);
+_x = 15;
+_y = 20;
+_x2 = vw / 8 - 10;
+_y2 = 50;
+draw_rectangle_colour(_x, _y, _x2, _y2, c4, c4, c4, c4, false);
 draw_text_colour((vw / 8 + 5) / 2 - string_width("SAVE") / 2, 35 - string_height("SAVE") / 2, "SAVE", c2, c2, c2, c2, 1);
+if ((mouse_x &gt; _x) &amp;&amp; (mouse_y &gt; _y) &amp;&amp; (mouse_x &lt; _x2) &amp;&amp; (mouse_y &lt; _y2))
+{
+    if (mouse_check_button_released(mb_left))
+    {
+        get_string("Enter map name:", "");
+        get_save_filename("", "");
+    }
+}
+
 // Load button
-draw_rectangle_colour(vw / 8 + 10, 20, vw / 4 - 15, 50, c4, c4, c4, c4, false);
+_x = vw / 8 + 10;
+_y = 20;
+_x2 = vw / 4 - 15;
+_y2 = 50;
+draw_rectangle_colour(_x, _y, _x2, _y2, c4, c4, c4, c4, false);
 draw_text_colour((vw / 4 - 15) / 2 + (vw / 8 + 10) / 2 - string_width("LOAD") / 2, 35 - string_height("LOAD") / 2, "LOAD", c2, c2, c2, c2, 1);
+if ((mouse_x &gt; _x) &amp;&amp; (mouse_y &gt; _y) &amp;&amp; (mouse_x &lt; _x2) &amp;&amp; (mouse_y &lt; _y2))
+{
+    if (mouse_check_button_released(mb_left))
+    {
+        get_string("Enter map name:", "");
+        get_save_filename("", "");
+    }
+}
+
 // Options button
-draw_rectangle_colour(15, 70, vw / 8 - 10, 100, c4, c4, c4, c4, false);
+_x = 15;
+_y = 70;
+_x2 = vw / 8 - 10;
+_y2 = 100;
+draw_rectangle_colour(_x, _y, _x2, _y2, c4, c4, c4, c4, false);
 draw_text_colour((vw / 8 + 5) / 2 - string_width("OPTIONS") / 2, 85 - string_height("OPTIONS") / 2, "OPTIONS", c2, c2, c2, c2, 1);
+if ((mouse_x &gt; _x) &amp;&amp; (mouse_y &gt; _y) &amp;&amp; (mouse_x &lt; _x2) &amp;&amp; (mouse_y &lt; _y2))
+{
+    if (mouse_check_button_released(mb_left))
+    {
+        get_string("Enter map name:", "");
+        get_save_filename("", "");
+    }
+}
+
 // Quit button
+_x = vw / 8 + 10;
+_y = 70;
+_x2 = vw / 4 - 15;
+_y2 = 100;
+draw_rectangle_colour(_x, _y, _x2, _y2, c4, c4, c4, c4, false);
+draw_text_colour((vw / 4 - 15) / 2 + (vw / 8 + 10) / 2 - string_width("QUIT") / 2, 85 - string_height("QUIT") / 2, "QUIT", c2, c2, c2, c2, 1);
+if ((mouse_x &gt; _x) &amp;&amp; (mouse_y &gt; _y) &amp;&amp; (mouse_x &lt; _x2) &amp;&amp; (mouse_y &lt; _y2))
+{
+    if (mouse_check_button_released(mb_left))
+    {
+        get_string("Enter map name:", "");
+        get_save_filename("", "");
+    }
+}
 
 
 draw_rectangle_colour(15, 150, vw / 4 - 15, vh - 10, c5, c5, c5, c5, false);
